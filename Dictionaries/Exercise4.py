@@ -22,3 +22,8 @@ mes={
     11: "noviembre",
     12: "diciembre"
 }
+
+fecha=nacimiento.split("/")
+m=int(fecha[1]) # se convierte a int para que no sea cadena de texto y lo reconozca el dicc
+
+print(f"Ha nacido el {fecha[0]} de {mes.get(m)} del {fecha[2]}")
