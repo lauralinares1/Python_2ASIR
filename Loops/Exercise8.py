@@ -4,7 +4,7 @@
 #3 1
 #5 3 1
 #7 5 3 1
-#9 7 5 3 1ç
+#9 7 5 3 1
 
 import os
 os.system("clear")
