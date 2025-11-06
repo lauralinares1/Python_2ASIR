@@ -31,6 +31,6 @@ print("\nLista de la compra \n")
 print("----------------------")
 for a,p in cesta.items():
     print(f"{a}          {p} €")
-    suma+=p
+    suma+=p #acumula en suma
 print("-----------------------")
 print(f"Total             {round(suma,2)} €")
