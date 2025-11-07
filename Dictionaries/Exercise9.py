@@ -7,9 +7,9 @@
 # por el número de factura y se eliminará del diccionario. Después de cada operación
 # el programa debe mostrar por pantalla la cantidad cobrada hasta el momento y la
 # cantidad pendiente de cobro.
+import os
 
 def limpiar():
-    import os
     os.system("clear")
 
 limpiar()
