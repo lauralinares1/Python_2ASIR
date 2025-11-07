@@ -43,13 +43,15 @@ while num == 1 or num == 2:
         cantidadpendiente+=costefactura
         n=input("Pulse cualquier tecla para continuar ")
     elif num ==2:
-        print("Se va a pagar una factura \n")
-        numerofactura=int(input("Introduzca el número de factura a pagar: "))
-        del facturas[numerofactura]
-        print("Se ha pagado la factura \n")
-        cantidadpendiente=cantidadpendiente-(float(facturas.get(numerofactura)))
-        cantidadcobrada+=facturas.get(numerofactura)
-        n=input("Pulse cualquier tecla para continuar ")
+        numero = int(input("Número de factura a pagar: "))
+        if numero in facturas:
+            coste = facturas[numero]
+            cantidadpendiente -= coste
+            cantidadcobrada += coste
+            del facturas[numero]
+            print(f"Factura {numero} pagada correctamente ({coste} €).")
+        else:
+            print(f"No se ha encontrado ninguna factura con número {numero}")
 
     print(f"La cantidad pendiente a pagar es de {cantidadpendiente} €")
     print(f"Hasta ahora, se han pagado {cantidadcobrada} € en facturas")
