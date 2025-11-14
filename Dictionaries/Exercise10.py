@@ -21,6 +21,81 @@ def limpiar():
 def continuar():
     tecla=input("Pulsa cualquier tecla para regresar al menú ")
 
+def anadir_cliente():
+    print("HA ELEGIDO AÑADIR UN CLIENTE")
+
+    nif=input("Introduzca el NIF del cliente a añadir: ")
+
+    if nif in clientes:
+        print("Error, el cliente que intenta añadir ya existe")
+        continuar()
+
+    else:
+        print(f"Se va a añadir al cliente con NIF {nif}...")
+        print("Introduzca los datos relativos a este: ")
+        nombre=input("Nombre: ")
+        direccion=input("Dirección: ")
+        telefono=input("Teléfono: ")
+        correo=input("Correo electrónico: ")
+        preferente=("¿Es preferente? (si|no) ")
+
+        while preferente != "si" or preferente != "no":
+            print("Respuesta a preferente no válida. Inténtelo de nuevo")
+            preferente=("¿Es preferente? (si|no) ")
+
+        if preferente == "si":
+            preferente=True
+        else:
+            preferente=False
+        
+        clientes[nif]={
+            "Nombre": nombre,
+            "Dirección": direccion,
+            "Teléfono": telefono,
+            "Correo Electrónico": correo,
+            "Preferente": preferente
+        }
+        print("El cliente se ha añadido con éxito")
+        continuar()
+    
+def eliminar_cliente():
+    print("HA ELEGIDO ELIMINAR UN CLIENTE")
+    nif=input("Introduzca el NIF del cliente a eliminar: ")
+
+    if nif in clientes:
+        print(f"Cliente encontrado con NIF {nif}")
+        resp=input("¿Está seguro de que desea eliminarlo? (si|no) ")
+
+        while resp != "si" or resp != "no":
+            print("Respuesta no válida, inténtelo de nuevo")
+            resp=input("¿Está seguro de que desea eliminarlo? (si|no) ")
+
+        if resp == "no":
+            print("Se ha cancelado la acción de borrar al cliente")
+            continuar()
+
+        else:
+            print("Se va a borrar al cliente...")
+            del clientes[nif]
+            print("El cliente ha sido eliminado")
+            continuar()
+    else:
+        print(f"No se ha encontrado ningún cliente con NIF {nif}")
+        continuar()
+
+def mostrar_cliente():
+    print("HA ELEGIDO MOSTRAR UN CLIENTE")
+    nif=input("Introduzca el NIF del cliente a mostrar: ")
+
+    if nif in clientes:
+
+def listar_clientes():
+    print("HA ELEGIDO MOSTRAR TODOS LOS CLIENTES")
+
+def listar_preferentes():
+    print("HA ELEGIDO MOSTRAR LOS CLIENTES PREFERENTES")
+
+#-----Comienzo del programa-----
 limpiar()
 
 opc=1
@@ -36,83 +111,19 @@ while opc!=6:
     print("4. Listar todos los clientes")
     print("5. Listar los clientes preferentes")
     print("6. Terminar")
+
     opc=int(input("Seleccione la opción por el número (1|2|3|4|5|6): "))
 
     if opc == 1:
-        print("HA ELEGIDO AÑADIR UN CLIENTE")
-
-        nif=input("Introduzca el NIF del cliente a añadir: ")
-
-        if nif in clientes:
-            print("Error, el cliente que intenta añadir ya existe")
-            continuar()
-
-        else:
-            print(f"Se va a añadir al cliente con NIF {nif}...")
-            print("Introduzca los datos relativos a este: ")
-            nombre=input("Nombre: ")
-            direccion=input("Dirección: ")
-            telefono=input("Teléfono: ")
-            correo=input("Correo electrónico: ")
-            preferente=("¿Es preferente? (si|no) ")
-
-            while preferente != "si" or preferente != "no":
-                print("Respuesta a preferente no válida. Inténtelo de nuevo")
-                preferente=("¿Es preferente? (si|no) ")
-
-            if preferente == "si":
-                preferente=True
-            else:
-                preferente=False
-            
-            clientes[nif]={
-                "Nombre": nombre,
-                "Dirección": direccion,
-                "Teléfono": telefono,
-                "Correo Electrónico": correo,
-                "Preferente": preferente
-            }
-            print("El cliente se ha añadido con éxito")
-            continuar()
-        
+        anadir_cliente()  
     elif opc == 2:
-        print("HA ELEGIDO ELIMINAR UN CLIENTE")
-        nif=input("Introduzca el NIF del cliente a eliminar: ")
-
-        if nif in clientes:
-            print(f"Cliente encontrado con NIF {nif}")
-            resp=input("¿Está seguro de que desea eliminarlo? (si|no) ")
-
-            while resp != "si" or resp != "no":
-                print("Respuesta no válida, inténtelo de nuevo")
-                resp=input("¿Está seguro de que desea eliminarlo? (si|no) ")
-
-            if resp == "no":
-                print("Se ha cancelado la acción de borrar al cliente")
-                continuar()
-
-            else:
-                print("Se va a borrar al cliente...")
-                del clientes[nif]
-                print("El cliente ha sido eliminado")
-                continuar()
-        else:
-            print(f"No se ha encontrado ningún cliente con NIF {nif}")
-            continuar()
-
+        eliminar_cliente()
     elif opc == 3:
-        print("HA ELEGIDO MOSTRAR UN CLIENTE")
-        nif=input("Introduzca el NIF del cliente a mostrar: ")
-
-        if nif in clientes:
-            
-
+        mostrar_cliente()
     elif opc == 4:
-        print("HA ELEGIDO MOSTRAR TODOS LOS CLIENTES")
-
+        listar_clientes()
     elif opc == 5:
-        print("HA ELEGIDO MOSTRAR LOS CLIENTES PREFERENTES")
-
+        listar_preferentes()
     elif opc == 6:
         print("Saliendo de la gestión de la Base de Datos del cliente")
         print("Gracias por usar nuestro programa")
