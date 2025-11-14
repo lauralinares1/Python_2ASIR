@@ -70,15 +70,14 @@ def eliminar_cliente():
             print("Respuesta no válida, inténtelo de nuevo")
             resp=input("¿Está seguro de que desea eliminarlo? (si|no) ")
 
-        if resp == "no":
-            print("Se ha cancelado la acción de borrar al cliente")
-            continuar()
-
-        else:
-            print("Se va a borrar al cliente...")
-            del clientes[nif]
-            print("El cliente ha sido eliminado")
-            continuar()
+            if resp == "no":
+                print("Se ha cancelado la acción de borrar al cliente")
+                continuar()
+            else:
+                print("Se va a borrar al cliente...")
+                del clientes[nif]
+                print("El cliente ha sido eliminado")
+                continuar()
     else:
         print(f"No se ha encontrado ningún cliente con NIF {nif}")
         continuar()
