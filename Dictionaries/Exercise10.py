@@ -37,16 +37,11 @@ def anadir_cliente():
         direccion=input("Dirección: ")
         telefono=input("Teléfono: ")
         correo=input("Correo electrónico: ")
-        preferente=("¿Es preferente? (si|no) ")
+        preferente=input("¿Es preferente? (si|no) ")
 
-        while preferente != "si" or preferente != "no":
+        while preferente != "si" and preferente != "no":
             print("Respuesta a preferente no válida. Inténtelo de nuevo")
-            preferente=("¿Es preferente? (si|no) ")
-
-        if preferente == "si":
-            preferente=True
-        else:
-            preferente=False
+            preferente=input("¿Es preferente? (si|no) ")
         
         clientes[nif]={
             "Nombre": nombre,
@@ -63,36 +58,59 @@ def eliminar_cliente():
     nif=input("Introduzca el NIF del cliente a eliminar: ")
 
     if nif in clientes:
-        print(f"Cliente encontrado con NIF {nif}")
+        print(f"Cliente encontrado con NIF {nif}. Información asignada al cliente {clientes[nif]["Nombre"]}")
         resp=input("¿Está seguro de que desea eliminarlo? (si|no) ")
 
-        while resp != "si" or resp != "no":
+        while resp != "si" and resp != "no":
             print("Respuesta no válida, inténtelo de nuevo")
             resp=input("¿Está seguro de que desea eliminarlo? (si|no) ")
 
-            if resp == "no":
-                print("Se ha cancelado la acción de borrar al cliente")
-                continuar()
-            else:
-                print("Se va a borrar al cliente...")
-                del clientes[nif]
-                print("El cliente ha sido eliminado")
-                continuar()
+        if resp == "no":
+            print("Se ha cancelado la acción de borrar al cliente")
+        elif resp == "si":
+            print("Se va a borrar al cliente...")
+            del clientes[nif]
+            print("El cliente ha sido eliminado")
     else:
         print(f"No se ha encontrado ningún cliente con NIF {nif}")
-        continuar()
+    continuar()
 
 def mostrar_cliente():
     print("HA ELEGIDO MOSTRAR UN CLIENTE")
     nif=input("Introduzca el NIF del cliente a mostrar: ")
 
     if nif in clientes:
+        print(f"Mostrando información del cliente con NIF {nif}:")
+        for item,valor in clientes[nif].items():
+            print(f"{item} --> {valor}")
+        continuar()
+    else:
+        print(f"No se ha encontrado ningún cliente en nuestra base de datos con el NIF {nif}")
+        continuar()
 
 def listar_clientes():
     print("HA ELEGIDO MOSTRAR TODOS LOS CLIENTES")
 
+    if len(clientes) == 0:
+        print("No hay ningún cliente en la base de datos")
+    else:
+        for nif in clientes.keys():
+            print(f"Información sobre el cliente {clientes[nif]["Nombre"]} con NIF {nif}")
+            for indice,valor in clientes[nif].items():
+                print(f"{indice} --> {valor}")
+        print("Se ha terminado de listar todos los clientes")
+
+    continuar()
+
 def listar_preferentes():
     print("HA ELEGIDO MOSTRAR LOS CLIENTES PREFERENTES")
+    for nif in clientes.keys():
+        if clientes[nif]["Preferente"] == "si":
+            print(f"Mostrando información sobre el cliente {clientes[nif]["Nombre"]}")
+            for indice,valor in clientes[nif].items():
+                print(f"{indice} --> {valor}")
+    print("Se han listado todos los clientes preferentes existentes")
+    continuar()
 
 #-----Comienzo del programa-----
 limpiar()
