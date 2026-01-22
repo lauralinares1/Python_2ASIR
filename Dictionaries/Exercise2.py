@@ -19,3 +19,4 @@ usuario={
 }
 
 print(f"{usuario.get("nombre")} tiene {usuario.get("edad")} años, vive en {usuario.get("direccion")} y su número de teléfono es {usuario.get("telefono")}")
+usuario["nombre"]
